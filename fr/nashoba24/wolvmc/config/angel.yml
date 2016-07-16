@@ -1,0 +1,22 @@
+enabled: true
+
+#The number must not contain commas
+water-cooldown: 30
+protection-chance: 20
+morph-time: 20
+morph-time-mission-finished: 40
+morph-cooldown: 120
+
+#Here, the number must contain commas
+friendly-mobs-damages-diviser: 2.0
+hostile-mobs-damages-multiplier: 3.0
+player-damages-diviser: 1.0
+
+#Powers activated (true) or not (false)
+place-water: true
+cant-damage-villager: true
+heal-player: true
+fly: true
+morph: true
+stop-rain: true
+kill-on-nether: true

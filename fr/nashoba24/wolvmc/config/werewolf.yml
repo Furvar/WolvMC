@@ -1,0 +1,45 @@
+enabled: true
+
+#The number must not contain commas
+cooldown-howl: 10
+
+#Here, the number must contain commas
+transf-time-diviser: 5.0
+
+#Powers activated (true) or not (false)
+damage-walk-orchid: true
+cant-break-orchid: true
+damage-by-orchid-attack: true
+invincible-for-mobs: true
+cant-shoot-arrow: true
+eat-bones: true
+howl: true
+cant-sleep: true
+
+#Tools: 0=All; 1=Gold,Wood,Stone,Iron; 2=Gold,Wood,Stone; 3=Gold,Wood; 4=No Tools
+levels:
+  1:
+    speed: 1
+    strength: 1
+    tools: 0
+    kills: 0
+  2:
+    speed: 2
+    strength: 2
+    tools: 1
+    kills: 10
+  3:
+    speed: 3
+    strength: 3
+    tools: 2
+    kills: 20
+  4:
+    speed: 4
+    strength: 4
+    tools: 3
+    kills: 30
+  5:
+    speed: 5
+    strength: 5
+    tools: 4
+    kills: 50

@@ -1,0 +1,19 @@
+enabled: true
+
+#The number must not contain commas
+speed-effect: 3
+invisibility-time: 30
+invisibility-cooldwn: 180
+blind-time: 15
+blind-cooldown: 60
+cake-cooldown: 90
+fly-hunger: 1
+
+#Powers activated (true) or not (false)
+wings: true
+invisibility: true
+blind-player: true
+place-cake: true
+fly: true
+arrow-disallow-fly: true
+heal-thanks-to-instinct: true

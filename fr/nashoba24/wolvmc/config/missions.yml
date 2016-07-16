@@ -1,0 +1,13 @@
+#Works with addons. The name of the element must be the name of the mission where . are replaced by _
+vampire_1: 10.0
+vampire_2: 20.0
+vampire_3: 50.0
+vampire_4: 25.0
+werewolf_1: 40.0
+werewolf_2: 15.0
+fairy_1: 5.0
+fairy_2: 30.0
+daemon_1: 50.0
+daemon_2: 20.0
+angel_1: 70.0
+angel_2: 15.0

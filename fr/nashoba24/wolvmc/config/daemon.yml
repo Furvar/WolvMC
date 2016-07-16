@@ -1,0 +1,24 @@
+enabled: true
+
+#The number must not contain commas
+strength: 3
+speed: 2
+lava-cooldown: 30
+kill-villager-radius: 10
+
+#Here, the number must contain commas
+gold-damages-multiplier: 2.0
+nether-damages-multiplier: 2.0
+
+#That element must be a String
+world-nether: "world_nether"
+
+#Powers activated (true) or not (false)
+invincible-explosion: true
+invincible-zombie-pigmen: true
+cant-break-glowstone: true
+transf-pigs-and-creepers: true
+place-lava: true
+kill-villagers: true
+pig-command: true
+tp-nether: true

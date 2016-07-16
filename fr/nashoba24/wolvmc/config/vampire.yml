@@ -1,0 +1,32 @@
+enabled: true
+
+#The number must not contain commas
+bat-time: 120
+bat-cooldown: 30
+blood-bottle-cooldown: 60
+blood-bottle-hunger: 6
+blood-bottle-limit: 3
+suck-cooldown: 20
+suck-player-hunger: 6
+suck-mobs-hunger: 2
+effect-speed: 2
+effect-strength: 2
+effect-fast-digging: 1
+effect-weakness: 2
+
+#Here, the number must contain commas
+fall-modifier: 2.5
+wooden-sword-damages-modifier: 4.0
+
+#Powers activated (true) or not (false)
+invincible-to-spider-zombie: true
+bat: true
+invoke-rain: true
+invincible-to-poison-wither: true
+fiole-fill-and-eat: true
+suck-blood: true
+look-blood: true
+damage-on-eat-no-blood: true
+cant-sleep: true
+vampire-command: true
+brume: true
