@@ -371,20 +371,24 @@ public class WolvMC extends JavaPlugin implements Listener {
 			  logo = logo + " " + ChatColor.RESET;
 		  }
 		  if(!getCustomPrefix(p.getName()).equals("")) {
-			  e.setFormat(ChatColor.translateAlternateColorCodes('&', logo + getCustomPrefix(p.getName())) + ChatColor.RESET + " " + p.getDisplayName()+ ChatColor.RESET + "> " + e.getMessage());
+			  //e.setFormat(ChatColor.translateAlternateColorCodes('&', logo + getCustomPrefix(p.getName())) + ChatColor.RESET + " " + p.getDisplayName()+ ChatColor.RESET + "> " + e.getMessage());
+			  e.setFormat(ChatColor.translateAlternateColorCodes('&', logo + getCustomPrefix(p.getName())) + ChatColor.RESET + " %s> %s");
 		  }
 		  else {
 			  if(!race.equals("")) {
 				  String prefix = prefixs.get(race);
 				  if(prefix!=null) {
-					  e.setFormat(logo + prefix + ChatColor.RESET + " " + p.getDisplayName() + "> " + e.getMessage());
+					  //e.setFormat(logo + prefix + ChatColor.RESET + " " + p.getDisplayName() + "> " + e.getMessage());
+					  e.setFormat(logo + prefix + ChatColor.RESET + " %s> %s");
 				  }
 				  else {
-					  e.setFormat(logo + ChatColor.BLACK + "???" + ChatColor.RESET + " " + p.getDisplayName() + "> " + e.getMessage());
+					  //e.setFormat(logo + ChatColor.BLACK + "???" + ChatColor.RESET + " " + p.getDisplayName() + "> " + e.getMessage());
+					  e.setFormat(logo + ChatColor.BLACK + "???" + ChatColor.RESET + " %s> %s");
 				  }
 			  }
 			  else {
-				  e.setFormat(logo + p.getDisplayName() + "> " + e.getMessage());
+				  //e.setFormat(logo + p.getDisplayName() + "> " + e.getMessage());
+				  e.setFormat(logo + ChatColor.RESET + " %s> %s");
 			  }
 		  }
 	  }

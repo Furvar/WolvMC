@@ -47,6 +47,7 @@ public class Angel implements Listener {
 	public static String healAngel = ChatColor.GREEN + "You have been healed by the Angel %player%!";
 	public static String healedSO = ChatColor.GREEN + "You have healed %player%!";
 	public static String netherMSG = ChatColor.RED + "Go back where you come creature of God!";
+	public static String morphFinish = ChatColor.RED + "Vous n'êtes plus métamorphosé!";
 	static Integer waterCooldown = 30;
 	static Integer protectionChance = 20;
 	static double friendly = 2.0;
@@ -63,7 +64,7 @@ public class Angel implements Listener {
 	static boolean fly = true;
 	static boolean morph = true;
 	static boolean stopRain = true;
-	static boolean killOnNether = true;
+	static boolean killOnNether = true;//TODO Voir vie
 	
 	@EventHandler
 	public void onInitEffects(WolvMCInitEffectsEvent e) {
@@ -249,6 +250,7 @@ public class Angel implements Listener {
 				            @Override
 				            public void run() {
 				            	DisguiseAPI.undisguiseToAll(p);
+				            	p.sendMessage(morphFinish);
 				            }
 				        }, morphTimeMission * 20);
 			        }
@@ -258,6 +260,7 @@ public class Angel implements Listener {
 				            @Override
 				            public void run() {
 				            	DisguiseAPI.undisguiseToAll(p);
+				            	p.sendMessage(morphFinish);
 				            }
 				        }, morphTime * 20);
 			        }

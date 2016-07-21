@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -26,10 +25,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scheduler.BukkitScheduler;
-import org.inventivetalent.glow.GlowAPI;
-import org.inventivetalent.glow.GlowAPI.Color;
-
 import fr.nashoba24.wolvmc.WolvMC;
 import fr.nashoba24.wolvmc.events.WolvMCInitEffectsEvent;
 
@@ -787,7 +782,7 @@ public class Elf implements Listener {
 		WolvMC.addMission("elf.1", (double) 150, "elf", "Manger %goal% fruits non comestibles dans les feuilles", "Vision Nocturne");
 	 	WolvMC.addMission("elf.2", (double) 40, "elf", "Faire pousser %goal% arbres", "Vitesse III");
 		WolvMC.getPlugin(WolvMC.class).getLogger().fine("Elf Class loaded!");
-        BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
+        /*BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
         scheduler.scheduleSyncRepeatingTask(WolvMC.getPlugin(WolvMC.class), new Runnable() {
             @Override
             public void run() {
@@ -808,7 +803,7 @@ public class Elf implements Listener {
 	    			}
             	}
             }
-        }, 0L, 20L);
+        }, 0L, 20L);*/
 	}
 	
 }

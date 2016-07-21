@@ -18,6 +18,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
@@ -64,7 +65,7 @@ public class Draco implements Listener {
 	@EventHandler
 	public void onEquip(ArmorEquipEvent e) {
 		if(e.getNewArmorPiece()!=null) {
-			if(e.getNewArmorPiece().getType()!=Material.SKULL && e.getNewArmorPiece().getType()!=Material.SKULL_ITEM && e.getNewArmorPiece().getType()!=Material.ELYTRA) {
+			if(e.getNewArmorPiece().getType()!=Material.SKULL && e.getNewArmorPiece().getType()!=Material.SKULL_ITEM && e.getNewArmorPiece().getType()!=Material.ELYTRA && e.getNewArmorPiece().getType()==Material.IRON_CHESTPLATE && e.getNewArmorPiece().getType()==Material.IRON_BOOTS && e.getNewArmorPiece().getType()==Material.IRON_LEGGINGS && e.getNewArmorPiece().getType()==Material.IRON_HELMET) {
 				if(WolvMC.getRace(e.getPlayer().getName()).equals("draco")) {
 					e.setCancelled(true);
 				}
@@ -94,7 +95,16 @@ public class Draco implements Listener {
 						e.setDamage(4);
 					}
 				}
-				if(e.getCause()==DamageCause.POISON || e.getCause()==DamageCause.WITHER || e.getCause()==DamageCause.FIRE_TICK || e.getCause()==DamageCause.FIRE) {
+			}
+		}
+	}
+	
+	@EventHandler
+	public void damage(EntityDamageEvent e) {
+		if(e.getEntity() instanceof Player) {
+			Player p = (Player) e.getEntity();
+			if(WolvMC.getRace(p.getName()).equals("draco")) {
+				if(e.getCause()==DamageCause.POISON || e.getCause()==DamageCause.WITHER || e.getCause()==DamageCause.FIRE_TICK || e.getCause()==DamageCause.FIRE || e.getCause()==DamageCause.FALL) {
 					e.setCancelled(true);
 				}
 			}
@@ -361,7 +371,7 @@ public class Draco implements Listener {
 	@EventHandler
 	public void onPlane(PlayerToggleSneakEvent e) {
 		Player p = e.getPlayer();
-		if(p.isSneaking() && p.getLocation().getBlock().getRelative(BlockFace.DOWN).getType() == Material.AIR) {
+		if(!p.isSneaking() && p.getLocation().getBlock().getRelative(BlockFace.DOWN).getType() == Material.AIR) {
 			if(WolvMC.getRace(p.getName()).equals("draco")) {
 				if(!glide.contains(p.getName())) {
 					p.setGliding(true);
@@ -389,6 +399,20 @@ public class Draco implements Listener {
 				}
 				else {
 					glide.remove(p.getName());
+				}
+			}
+		}
+	}
+	
+	@EventHandler
+	public void onPushFromGround(PlayerInteractEvent e) {
+		if(e.getAction()==Action.LEFT_CLICK_BLOCK) {
+			Player p = e.getPlayer();
+			if(e.getItem()==null) {
+				if(((Entity) p).isOnGround() && p.getLocation().getPitch()==90) {
+					if(WolvMC.getRace(p.getName()).equals("draco")) {
+						p.setVelocity(p.getVelocity().setY(3.75));
+					}
 				}
 			}
 		}

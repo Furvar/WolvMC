@@ -122,15 +122,18 @@ public class Vampire implements Listener {
 			return;
 		}
 		if(e.getEntity() instanceof Player) {
-			if((e.getDamager() instanceof Zombie || e.getDamager() instanceof Spider) && WolvMC.getRace(((Player) e.getEntity()).getName()).equals("vampire")) {
-				e.setCancelled(true);
-			}
-			else if(e.getDamager() instanceof Projectile) {
-				Projectile proj = (Projectile) e.getDamager();
-				if(proj.getShooter() instanceof LivingEntity) {
-					EntityType t = ((LivingEntity) proj.getShooter()).getType();
-					if(t==EntityType.ZOMBIE || t==EntityType.SKELETON || t==EntityType.SPIDER) {
-						e.setCancelled(true);
+			Player p = (Player) e.getEntity();
+			if(WolvMC.getRace(p.getName()).equals("vampire")) {
+				if((e.getDamager() instanceof Zombie || e.getDamager() instanceof Spider) && WolvMC.getRace(((Player) e.getEntity()).getName()).equals("vampire")) {
+					e.setCancelled(true);
+				}
+				else if(e.getDamager() instanceof Projectile) {
+					Projectile proj = (Projectile) e.getDamager();
+					if(proj.getShooter() instanceof LivingEntity) {
+						EntityType t = ((LivingEntity) proj.getShooter()).getType();
+						if(t==EntityType.ZOMBIE || t==EntityType.SKELETON || t==EntityType.SPIDER) {
+							e.setCancelled(true);
+						}
 					}
 				}
 			}
@@ -443,26 +446,41 @@ public class Vampire implements Listener {
 			return;
 		}
 		Player p = e.getPlayer();
-		if(e.getItem().getItemMeta().getDisplayName()!=null);
-		if(WolvMC.getRace(p.getName()).equals("vampire") && e.getItem().getItemMeta().getDisplayName().equals(bloodBottle)) {
-			if(p.getFoodLevel()<20) {
-				e.setCancelled(true);
-				if(p.getFoodLevel()> (20 - fioleHunger)) {
-					Integer food = 20 - p.getFoodLevel();
-					food = fioleHunger - food;
-					p.setSaturation(food);
+		if(e.getItem().hasItemMeta()) {
+			if(e.getItem().getItemMeta().getDisplayName()!=null) {
+				if(WolvMC.getRace(p.getName()).equals("vampire") && e.getItem().getItemMeta().getDisplayName().equals(bloodBottle)) {
+					if(p.getFoodLevel()<20) {
+						e.setCancelled(true);
+						if(p.getFoodLevel()> (20 - fioleHunger)) {
+							Integer food = 20 - p.getFoodLevel();
+							food = fioleHunger - food;
+							p.setSaturation(food);
+						}
+						p.setFoodLevel(p.getFoodLevel() + fioleHunger);
+						if(p.getInventory().getItemInMainHand()!=null) {
+							if(p.getInventory().getItemInMainHand().hasItemMeta()) {
+								if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName()!=null) {
+									if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(bloodBottle)) {
+										p.getInventory().setItemInMainHand(new ItemStack(Material.GLASS_BOTTLE, 1));
+									}
+								}
+							}
+						}
+						else if(p.getInventory().getItemInOffHand()!=null) {
+							if(p.getInventory().getItemInOffHand().hasItemMeta()) {
+								if(p.getInventory().getItemInOffHand().getItemMeta().getDisplayName()!=null) {
+									if(p.getInventory().getItemInOffHand().getItemMeta().getDisplayName().equals(bloodBottle)) {
+										p.getInventory().setItemInOffHand(new ItemStack(Material.GLASS_BOTTLE, 1));
+									}
+								}
+							}
+						}
+					}
+					else {
+						p.sendMessage(notHungry);
+						e.setCancelled(true);
+					}
 				}
-				p.setFoodLevel(p.getFoodLevel() + fioleHunger);
-				if(e.getItem()==p.getInventory().getItemInOffHand()) {
-					p.getInventory().getItemInOffHand().setType(Material.GLASS_BOTTLE);
-				}
-				else if(e.getItem()==p.getInventory().getItemInMainHand()) {
-					p.getInventory().getItemInMainHand().setType(Material.GLASS_BOTTLE);
-				}
-			}
-			else {
-				p.sendMessage(notHungry);
-				e.setCancelled(true);
 			}
 		}
 	}

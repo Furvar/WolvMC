@@ -306,7 +306,7 @@ public class Main implements CommandExecutor {
 							} catch (IOException e) {
 								e.printStackTrace();
 							}
-							sender.sendMessage(saveModified);
+							sender.sendMessage(saveModified.replaceAll("%player%", args[1]));
 							return true;
 						}
 						else {

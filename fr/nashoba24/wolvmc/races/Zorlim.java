@@ -49,7 +49,7 @@ public class Zorlim implements Listener {
 	@EventHandler
 	public void onInitEffects(WolvMCInitEffectsEvent e) {
 		if(e.getRace().equals("zorlim")) {
-			e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 2147483647, 1));
+			e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 2147483647, 0));
 		}
 	}
 	
@@ -256,7 +256,7 @@ public class Zorlim implements Listener {
 	}
 	
 	@EventHandler
-	public void onPlaceFire(PlayerInteractEvent e) { //== Non testé ==
+	public void onPlaceFire(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
 		if(WolvMC.getRace(p.getName()).equals("zorlim") && p.isSneaking() && e.getAction()==Action.RIGHT_CLICK_BLOCK) {
 		       int cooldownTime = 30;
@@ -269,6 +269,7 @@ public class Zorlim implements Listener {
 		        if(placefire.containsKey(p.getName())) {
 		            long secondsLeft = ((placefire.get(p.getName()) / 1000) + cooldownTime) - (System.currentTimeMillis() / 1000);
 		            if(secondsLeft>0) {
+		            	firebug.put(p.getName(), System.currentTimeMillis());
 		            	int seconds = (int) secondsLeft;
 		            	p.sendMessage(WolvMC.msgCooldown(seconds));
 		                return;
@@ -285,7 +286,7 @@ public class Zorlim implements Listener {
 			        	firebug.put(p.getName(), System.currentTimeMillis());
 			        	e.getClickedBlock().getLocation().add(0, 1, 0).getBlock().setType(Material.FIRE);
 			        	if(WolvMC.hasFinishMission("zorlim.2", p.getName())) {
-			        		int radius = 3;
+			        		int radius = 2;
 			        		Location loc = e.getClickedBlock().getLocation();
 			        		World world = loc.getWorld();
 			        		for (int x = -radius; x < radius; x++) {
@@ -293,7 +294,7 @@ public class Zorlim implements Listener {
 			        		        for (int z = -radius; z < radius; z++) {
 			        		            Block block = world.getBlockAt(loc.getBlockX()+x, loc.getBlockY()+y, loc.getBlockZ()+z);
 			        		            if (block.getLocation().add(0, 1, 0).getBlock().getType()==Material.AIR && block.getType()!=Material.AIR && block.getType()!=Material.FIRE) {
-			        		            	block.getLocation().add(0, 1, 0).getBlock().setType(Material.AIR);
+			        		            	block.getLocation().add(0, 1, 0).getBlock().setType(Material.FIRE);
 			        		            }
 			        		        }
 			        		    }
@@ -389,7 +390,7 @@ public class Zorlim implements Listener {
     									p.removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
     								}
     								if(!p.hasPotionEffect(PotionEffectType.INCREASE_DAMAGE)) {
-    									p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 2147483647, 2));
+    									p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 2147483647, 1));
     								}
     							}
     							else {
@@ -397,7 +398,7 @@ public class Zorlim implements Listener {
     									p.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
     								}
     								if(!p.hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE)) {
-    									p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 2147483647, 2));
+    									p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 2147483647, 1));
     								}
     							}
     						}
@@ -406,7 +407,7 @@ public class Zorlim implements Listener {
 									p.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
 								}
 								if(!p.hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE)) {
-									p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 2147483647, 2));
+									p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 2147483647, 1));
 								}
 							}
       					}
@@ -415,20 +416,25 @@ public class Zorlim implements Listener {
 								p.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
 							}
 							if(!p.hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE)) {
-								p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 2147483647, 2));
+								p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 2147483647, 1));
 							}
 						}
-      					if(p.getLocation().getBlock().getType()==Material.LAVA) {
+      					if(p.getLocation().getBlock().getType()==Material.LAVA || p.getLocation().getBlock().getType()==Material.STATIONARY_LAVA) {
       						if(p.getHealth()<p.getMaxHealth()) {
-      							p.setHealth(p.getHealth() + 0.5);
+      							if(p.getMaxHealth() - p.getHealth()<2) {
+      								p.setHealth(p.getMaxHealth());
+      							}
+      							else {
+      								p.setHealth(p.getHealth() + 2);
+      							}
       						}
       					}
       					else if(p.getLocation().getBlock().getType()==Material.WATER || p.getLocation().getBlock().getType()==Material.STATIONARY_WATER) {
       						if(p.getVehicle()==null) {
-      							p.damage(1);
+      							p.damage(4);
       						}
       						else if(p.getVehicle().getType()!=EntityType.BOAT) {
-      							p.damage(1);
+      							p.damage(4);
       						}
       					}
     				}
