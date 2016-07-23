@@ -67,7 +67,7 @@ public class Zorlim implements Listener {
 		if(e.getAction()==Action.RIGHT_CLICK_AIR && e.getItem()!=null) {
 			if(e.getItem().getType()==Material.FIREBALL) {
 				if(WolvMC.getRace(p.getName()).equals("zorlim")) {
-					if(p.getInventory().getItemInMainHand()==e.getItem()) {
+					if(e.getHand().equals(EquipmentSlot.HAND)) {
 						if(e.getItem().getAmount()==1) {
 							p.getInventory().setItemInMainHand(null);
 						}
@@ -75,7 +75,7 @@ public class Zorlim implements Listener {
 							p.getInventory().getItemInMainHand().setAmount(p.getInventory().getItemInMainHand().getAmount() - 1);
 						}
 					}
-					else {
+					else if(e.getHand().equals(EquipmentSlot.OFF_HAND)){
 						if(e.getItem().getAmount()==1) {
 							p.getInventory().setItemInOffHand(null);
 						}
@@ -94,21 +94,23 @@ public class Zorlim implements Listener {
 	@EventHandler
 	public void onLeftBlazeRod(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
-		if(e.getAction()==Action.LEFT_CLICK_AIR && p.getInventory().getItemInMainHand().getType()==Material.BLAZE_ROD && WolvMC.getRace(p.getName()).equals("zorlim") && !WolvMC.canUsePowerSafe(p.getLocation(), p)) {
-			if(WolvMC.canUsePowerBlock(p.getLocation())) {
-		       int cooldownTime = 20;
-		        if(blazeball.containsKey(p.getName())) {
-		            long secondsLeft = ((blazeball.get(p.getName()) / 1000) + cooldownTime) - (System.currentTimeMillis() / 1000);
-		            if(secondsLeft>0) {
-		            	int seconds = (int) secondsLeft;
-		            	p.sendMessage(WolvMC.msgCooldown(seconds));
-		            	p.playSound(p.getLocation(), Sound.ENTITY_ITEM_BREAK, 1, 1);
-		                return;
-		            }
-		        }
-		        blazeball.put(p.getName(), System.currentTimeMillis());
-		        Fireball fireball = p.launchProjectile(Fireball.class);
-		        fireball.setVelocity(fireball.getVelocity().multiply(4));
+		if(e.getItem()!=null && e.getAction()==Action.LEFT_CLICK_AIR) {
+			if(e.getItem().getType()==Material.BLAZE_ROD && WolvMC.getRace(p.getName()).equals("zorlim")) {
+				if(WolvMC.canUsePowerBlock(p.getLocation(), p)) {
+			       int cooldownTime = 20;
+			        if(blazeball.containsKey(p.getName())) {
+			            long secondsLeft = ((blazeball.get(p.getName()) / 1000) + cooldownTime) - (System.currentTimeMillis() / 1000);
+			            if(secondsLeft>0) {
+			            	int seconds = (int) secondsLeft;
+			            	p.sendMessage(WolvMC.msgCooldown(seconds));
+			            	p.playSound(p.getLocation(), Sound.ENTITY_ITEM_BREAK, 1, 1);
+			                return;
+			            }
+			        }
+			        blazeball.put(p.getName(), System.currentTimeMillis());
+			        Fireball fireball = p.launchProjectile(Fireball.class);
+			        fireball.setVelocity(fireball.getVelocity().multiply(4));
+				}
 			}
 		}
 	}
