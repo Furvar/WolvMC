@@ -396,22 +396,22 @@ public class Vampire implements Listener {
 			        	}
 			        	if(blood<=fioleLimit) {
 			        		if(air) {
-				        		if(is.getAmount()==1) {
-				        			if(e.getHand()==EquipmentSlot.HAND) {
-				        				p.getInventory().getItemInMainHand().setType(Material.AIR);
-				        			}
-				        			else if(e.getHand()==EquipmentSlot.OFF_HAND) {
-				        				p.getInventory().getItemInOffHand().setType(Material.AIR);
-				        			}
-				        		}
-				        		else {
-				        			if(e.getHand()==EquipmentSlot.HAND) {
-				        				p.getInventory().getItemInMainHand().setAmount(p.getInventory().getItemInMainHand().getAmount() - 1);
-				        			}
-				        			else if(e.getHand()==EquipmentSlot.OFF_HAND) {
-				        				p.getInventory().getItemInOffHand().setAmount(p.getInventory().getItemInOffHand().getAmount() - 1);
-				        			}
-				        		}
+								if(e.getHand().equals(EquipmentSlot.HAND)) {
+									if(is.getAmount()==1) {
+										p.getInventory().setItemInMainHand(null);
+									}
+									else {
+										p.getInventory().getItemInMainHand().setAmount(p.getInventory().getItemInMainHand().getAmount() - 1);
+									}
+								}
+								else if(e.getHand().equals(EquipmentSlot.OFF_HAND)){
+									if(is.getAmount()==1) {
+										p.getInventory().setItemInOffHand(null);
+									}
+									else {
+										p.getInventory().getItemInOffHand().setAmount(p.getInventory().getItemInOffHand().getAmount() - 1);
+									}
+								}
 				        		rc.setFoodLevel(rc.getFoodLevel() - fioleHunger);
 				        		ItemStack itemFiole = new ItemStack(Material.POTION, 1, (short) 8201);
 				        		ItemMeta meta = itemFiole.getItemMeta();
