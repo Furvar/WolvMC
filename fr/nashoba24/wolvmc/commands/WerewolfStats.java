@@ -159,7 +159,7 @@ public class WerewolfStats implements CommandExecutor {
 		String lvl = "1";
 		for (Entry<String, Integer> entry : levels.entrySet())
 		{
-			if(levels.get(lvl)<entry.getValue()) {
+			if(levels.get(lvl)<i && entry.getValue()>levels.get(lvl)) {
 				lvl = entry.getKey();
 			}
 		}
