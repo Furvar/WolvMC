@@ -65,7 +65,7 @@ public class Draco implements Listener {
 	@EventHandler
 	public void onEquip(ArmorEquipEvent e) {
 		if(e.getNewArmorPiece()!=null) {
-			if(e.getNewArmorPiece().getType()!=Material.SKULL && e.getNewArmorPiece().getType()!=Material.SKULL_ITEM && e.getNewArmorPiece().getType()!=Material.ELYTRA && e.getNewArmorPiece().getType()==Material.IRON_CHESTPLATE && e.getNewArmorPiece().getType()==Material.IRON_BOOTS && e.getNewArmorPiece().getType()==Material.IRON_LEGGINGS && e.getNewArmorPiece().getType()==Material.IRON_HELMET) {
+			if(e.getNewArmorPiece().getType()!=Material.SKULL && e.getNewArmorPiece().getType()!=Material.SKULL_ITEM && e.getNewArmorPiece().getType()!=Material.ELYTRA && e.getNewArmorPiece().getType()!=Material.IRON_CHESTPLATE && e.getNewArmorPiece().getType()!=Material.IRON_BOOTS && e.getNewArmorPiece().getType()!=Material.IRON_LEGGINGS && e.getNewArmorPiece().getType()!=Material.IRON_HELMET) {
 				if(WolvMC.getRace(e.getPlayer().getName()).equals("draco")) {
 					e.setCancelled(true);
 				}
