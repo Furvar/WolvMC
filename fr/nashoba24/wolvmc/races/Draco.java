@@ -92,7 +92,7 @@ public class Draco implements Listener {
 						e.setDamage(e.getFinalDamage() * 1.5);
 					}
 					else if(ent.getType()==EntityType.SNOWBALL) {
-						e.setDamage(4);
+						p.damage(4);
 					}
 				}
 			}
