@@ -25,6 +25,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
 import fr.nashoba24.wolvmc.WolvMC;
 import fr.nashoba24.wolvmc.events.WolvMCInitEffectsEvent;
 
@@ -782,6 +783,14 @@ public class Elf implements Listener {
 		WolvMC.addMission("elf.1", (double) 150, "elf", "Manger %goal% fruits non comestibles dans les feuilles", "Vision Nocturne");
 	 	WolvMC.addMission("elf.2", (double) 40, "elf", "Faire pousser %goal% arbres", "Vitesse III");
 		WolvMC.getPlugin(WolvMC.class).getLogger().fine("Elf Class loaded!");
+		/*if(WolvMC.getPlugin(WolvMC.class).getServer().getPluginManager().getPlugin("ProtocolLib")!=null) {
+		    ProtocolLibrary.getProtocolManager().addPacketListener(new PacketAdapter(WolvMC.getPlugin(WolvMC.class), PacketType.Play.Server.NAMED_SOUND_EFFECT) {
+		    	@Override
+		    	public void onPacketSending(PacketEvent event) {
+		    		 System.out.println();
+		    	}
+		    });
+		}*/
         /*BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
         scheduler.scheduleSyncRepeatingTask(WolvMC.getPlugin(WolvMC.class), new Runnable() {
             @Override

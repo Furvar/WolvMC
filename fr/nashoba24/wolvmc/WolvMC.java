@@ -65,6 +65,7 @@ import fr.nashoba24.wolvmc.races.Daemon;
 import fr.nashoba24.wolvmc.races.Draco;
 import fr.nashoba24.wolvmc.races.Elf;
 import fr.nashoba24.wolvmc.races.Fairy;
+import fr.nashoba24.wolvmc.races.Human;
 import fr.nashoba24.wolvmc.races.Orc;
 import fr.nashoba24.wolvmc.races.Vampire;
 import fr.nashoba24.wolvmc.races.Werewolf;
@@ -168,6 +169,10 @@ public class WolvMC extends JavaPlugin implements Listener {
 			  Bukkit.getPluginManager().registerEvents(new ArmorListener(new ArrayList<String>()), this);
 			  getCommand("dracorage").setExecutor(new Dracorage());
 			  Draco.initDraco();
+		  }
+		  if(Human.enabled) {
+			  Bukkit.getPluginManager().registerEvents(new Human(), this);
+			  Human.initHuman();
 		  }
 		  getCommand("wolvmc").setExecutor(new Main());
 		  getCommand("missions").setExecutor(new Missions());
